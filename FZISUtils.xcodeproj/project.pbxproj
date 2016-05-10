@@ -1,0 +1,644 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		756DB6851CE1D6E500103999 /* dbfopen.c in Sources */ = {isa = PBXBuildFile; fileRef = 756DB6811CE1D6E500103999 /* dbfopen.c */; };
+		756DB6861CE1D6E500103999 /* shapefil.h in Headers */ = {isa = PBXBuildFile; fileRef = 756DB6821CE1D6E500103999 /* shapefil.h */; };
+		756DB6871CE1D6E500103999 /* shpopen.c in Sources */ = {isa = PBXBuildFile; fileRef = 756DB6831CE1D6E500103999 /* shpopen.c */; };
+		756DB6881CE1D6E500103999 /* shptree.c in Sources */ = {isa = PBXBuildFile; fileRef = 756DB6841CE1D6E500103999 /* shptree.c */; };
+		7582DA731C5723980044C5D0 /* AGSSketchGraphicsLayer+exposePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 7582DA611C5723980044C5D0 /* AGSSketchGraphicsLayer+exposePrivate.h */; };
+		7582DA741C5723980044C5D0 /* AGSSketchGraphicsLayer+exposePrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582DA621C5723980044C5D0 /* AGSSketchGraphicsLayer+exposePrivate.m */; };
+		7582DA751C5723980044C5D0 /* FZISGPSTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 7582DA631C5723980044C5D0 /* FZISGPSTool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7582DA761C5723980044C5D0 /* FZISGPSTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582DA641C5723980044C5D0 /* FZISGPSTool.m */; };
+		7582DA771C5723980044C5D0 /* FZISNetworkTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 7582DA651C5723980044C5D0 /* FZISNetworkTool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7582DA781C5723980044C5D0 /* FZISNetworkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582DA661C5723980044C5D0 /* FZISNetworkTool.m */; };
+		7582DA791C5723980044C5D0 /* FZISQueryTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 7582DA671C5723980044C5D0 /* FZISQueryTool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7582DA7A1C5723980044C5D0 /* FZISQueryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582DA681C5723980044C5D0 /* FZISQueryTool.m */; };
+		7582DA7B1C5723980044C5D0 /* FZISSandboxTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 7582DA691C5723980044C5D0 /* FZISSandboxTool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7582DA7C1C5723980044C5D0 /* FZISSandboxTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582DA6A1C5723980044C5D0 /* FZISSandboxTool.m */; };
+		7582DA831C5723980044C5D0 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 7582DA711C5723980044C5D0 /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7582DA841C5723980044C5D0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582DA721C5723980044C5D0 /* Reachability.m */; };
+		7582DA871C5725360044C5D0 /* FZISMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7582DA851C5725360044C5D0 /* FZISMapView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7582DA881C5725360044C5D0 /* FZISMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582DA861C5725360044C5D0 /* FZISMapView.m */; };
+		7582DA8B1C5726B90044C5D0 /* FZISLineView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7582DA891C5726B90044C5D0 /* FZISLineView.h */; };
+		7582DA8C1C5726B90044C5D0 /* FZISLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582DA8A1C5726B90044C5D0 /* FZISLineView.m */; };
+		7588D08A1C47843D0084B05F /* FZISMeasurementTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 7588D0881C47843D0084B05F /* FZISMeasurementTool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7588D08B1C47843D0084B05F /* FZISMeasurementTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7588D0891C47843D0084B05F /* FZISMeasurementTool.m */; };
+		75D5A1D4197CF2EA00EAE6D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75D5A1D3197CF2EA00EAE6D6 /* Foundation.framework */; };
+		75D5A1E3197CF2EA00EAE6D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75D5A1D3197CF2EA00EAE6D6 /* Foundation.framework */; };
+		75D5A1E8197CF2EA00EAE6D6 /* libFZISUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75D5A1D0197CF2EA00EAE6D6 /* libFZISUtils.a */; };
+		75D5A1EE197CF2EA00EAE6D6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75D5A1EC197CF2EA00EAE6D6 /* InfoPlist.strings */; };
+		75D5A1F0197CF2EA00EAE6D6 /* FZISUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D5A1EF197CF2EA00EAE6D6 /* FZISUtilsTests.m */; };
+		75D5A1FD197CF35600EAE6D6 /* RequestPreprocessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D5A1FA197CF35600EAE6D6 /* RequestPreprocessor.m */; };
+		75D5A1FE197CF35600EAE6D6 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D5A1FC197CF35600EAE6D6 /* Utils.m */; };
+		75D5A200197CF39B00EAE6D6 /* RequestPreprocessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 75D5A1F9197CF35600EAE6D6 /* RequestPreprocessor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		75D5A201197CF39B00EAE6D6 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 75D5A1FB197CF35600EAE6D6 /* Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		75D5A205197CF55D00EAE6D6 /* GDataXMLNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 75D5A203197CF55D00EAE6D6 /* GDataXMLNode.h */; };
+		75D5A20B197CF6F200EAE6D6 /* DESEncodeHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 75D5A209197CF6F200EAE6D6 /* DESEncodeHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		75D5A20C197CF6F200EAE6D6 /* DESEncodeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D5A20A197CF6F200EAE6D6 /* DESEncodeHelper.m */; };
+		75D5A210197CF93600EAE6D6 /* GTMBase64.h in Headers */ = {isa = PBXBuildFile; fileRef = 75D5A20D197CF93600EAE6D6 /* GTMBase64.h */; };
+		75D5A211197CF93600EAE6D6 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D5A20E197CF93600EAE6D6 /* GTMBase64.m */; };
+		75D5A212197CF93600EAE6D6 /* GTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 75D5A20F197CF93600EAE6D6 /* GTMDefines.h */; };
+		75D5A218197CFC7C00EAE6D6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75D5A217197CFC7C00EAE6D6 /* SystemConfiguration.framework */; };
+		75F94A8A1C18149D00FFF3AE /* ShpHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 75F94A881C18149D00FFF3AE /* ShpHelper.h */; };
+		75F94A8B1C18149D00FFF3AE /* ShpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F94A891C18149D00FFF3AE /* ShpHelper.m */; };
+		75F94A8D1C18158300FFF3AE /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F94A8C1C18158300FFF3AE /* AssetsLibrary.framework */; };
+		75F94A8F1C18159200FFF3AE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F94A8E1C18159200FFF3AE /* CoreGraphics.framework */; };
+		75F94A911C18159E00FFF3AE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F94A901C18159E00FFF3AE /* CoreLocation.framework */; };
+		75F94A931C1815AF00FFF3AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F94A921C1815AF00FFF3AE /* CoreText.framework */; };
+		75F94A951C1815BC00FFF3AE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F94A941C1815BC00FFF3AE /* QuartzCore.framework */; };
+		75F94A971C1815C900FFF3AE /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F94A961C1815C900FFF3AE /* MediaPlayer.framework */; };
+		75F94A991C1815D000FFF3AE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F94A981C1815D000FFF3AE /* MobileCoreServices.framework */; };
+		75F94A9B1C1815D900FFF3AE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F94A9A1C1815D900FFF3AE /* OpenGLES.framework */; };
+		75F94A9D1C1815E000FFF3AE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F94A9C1C1815E000FFF3AE /* Security.framework */; };
+		75F94A9F1C1815E800FFF3AE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F94A9E1C1815E800FFF3AE /* UIKit.framework */; };
+		75F94AA11C1829BA00FFF3AE /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F94AA01C1829BA00FFF3AE /* GDataXMLNode.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		75D5A1E6197CF2EA00EAE6D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75D5A1C8197CF2E900EAE6D6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 75D5A1CF197CF2EA00EAE6D6;
+			remoteInfo = FZISUtils;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		75D5A1CE197CF2EA00EAE6D6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		756DB6811CE1D6E500103999 /* dbfopen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dbfopen.c; path = ShpLib/dbfopen.c; sourceTree = "<group>"; };
+		756DB6821CE1D6E500103999 /* shapefil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shapefil.h; path = ShpLib/shapefil.h; sourceTree = "<group>"; };
+		756DB6831CE1D6E500103999 /* shpopen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = shpopen.c; path = ShpLib/shpopen.c; sourceTree = "<group>"; };
+		756DB6841CE1D6E500103999 /* shptree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = shptree.c; path = ShpLib/shptree.c; sourceTree = "<group>"; };
+		7582DA611C5723980044C5D0 /* AGSSketchGraphicsLayer+exposePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AGSSketchGraphicsLayer+exposePrivate.h"; sourceTree = "<group>"; };
+		7582DA621C5723980044C5D0 /* AGSSketchGraphicsLayer+exposePrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AGSSketchGraphicsLayer+exposePrivate.m"; sourceTree = "<group>"; };
+		7582DA631C5723980044C5D0 /* FZISGPSTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZISGPSTool.h; sourceTree = "<group>"; };
+		7582DA641C5723980044C5D0 /* FZISGPSTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZISGPSTool.m; sourceTree = "<group>"; };
+		7582DA651C5723980044C5D0 /* FZISNetworkTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZISNetworkTool.h; sourceTree = "<group>"; };
+		7582DA661C5723980044C5D0 /* FZISNetworkTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZISNetworkTool.m; sourceTree = "<group>"; };
+		7582DA671C5723980044C5D0 /* FZISQueryTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZISQueryTool.h; sourceTree = "<group>"; };
+		7582DA681C5723980044C5D0 /* FZISQueryTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZISQueryTool.m; sourceTree = "<group>"; };
+		7582DA691C5723980044C5D0 /* FZISSandboxTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZISSandboxTool.h; sourceTree = "<group>"; };
+		7582DA6A1C5723980044C5D0 /* FZISSandboxTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZISSandboxTool.m; sourceTree = "<group>"; };
+		7582DA711C5723980044C5D0 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		7582DA721C5723980044C5D0 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		7582DA851C5725360044C5D0 /* FZISMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZISMapView.h; sourceTree = "<group>"; };
+		7582DA861C5725360044C5D0 /* FZISMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZISMapView.m; sourceTree = "<group>"; };
+		7582DA891C5726B90044C5D0 /* FZISLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZISLineView.h; sourceTree = "<group>"; };
+		7582DA8A1C5726B90044C5D0 /* FZISLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZISLineView.m; sourceTree = "<group>"; };
+		7588D0881C47843D0084B05F /* FZISMeasurementTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZISMeasurementTool.h; sourceTree = "<group>"; };
+		7588D0891C47843D0084B05F /* FZISMeasurementTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZISMeasurementTool.m; sourceTree = "<group>"; };
+		75D5A1D0197CF2EA00EAE6D6 /* libFZISUtils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFZISUtils.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		75D5A1D3197CF2EA00EAE6D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		75D5A1D7197CF2EA00EAE6D6 /* FZISUtils-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FZISUtils-Prefix.pch"; sourceTree = "<group>"; };
+		75D5A1E0197CF2EA00EAE6D6 /* FZISUtilsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FZISUtilsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		75D5A1EB197CF2EA00EAE6D6 /* FZISUtilsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FZISUtilsTests-Info.plist"; sourceTree = "<group>"; };
+		75D5A1ED197CF2EA00EAE6D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		75D5A1EF197CF2EA00EAE6D6 /* FZISUtilsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FZISUtilsTests.m; sourceTree = "<group>"; };
+		75D5A1F9197CF35600EAE6D6 /* RequestPreprocessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestPreprocessor.h; sourceTree = "<group>"; };
+		75D5A1FA197CF35600EAE6D6 /* RequestPreprocessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestPreprocessor.m; sourceTree = "<group>"; };
+		75D5A1FB197CF35600EAE6D6 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		75D5A1FC197CF35600EAE6D6 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; wrapsLines = 1; };
+		75D5A203197CF55D00EAE6D6 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		75D5A207197CF58C00EAE6D6 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		75D5A209197CF6F200EAE6D6 /* DESEncodeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESEncodeHelper.h; sourceTree = "<group>"; };
+		75D5A20A197CF6F200EAE6D6 /* DESEncodeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESEncodeHelper.m; sourceTree = "<group>"; };
+		75D5A20D197CF93600EAE6D6 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
+		75D5A20E197CF93600EAE6D6 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
+		75D5A20F197CF93600EAE6D6 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		75D5A217197CFC7C00EAE6D6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		75F94A881C18149D00FFF3AE /* ShpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShpHelper.h; sourceTree = "<group>"; };
+		75F94A891C18149D00FFF3AE /* ShpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShpHelper.m; sourceTree = "<group>"; };
+		75F94A8C1C18158300FFF3AE /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		75F94A8E1C18159200FFF3AE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		75F94A901C18159E00FFF3AE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		75F94A921C1815AF00FFF3AE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		75F94A941C1815BC00FFF3AE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		75F94A961C1815C900FFF3AE /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		75F94A981C1815D000FFF3AE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		75F94A9A1C1815D900FFF3AE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		75F94A9C1C1815E000FFF3AE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		75F94A9E1C1815E800FFF3AE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		75F94AA01C1829BA00FFF3AE /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		75D5A1CD197CF2EA00EAE6D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75F94A9F1C1815E800FFF3AE /* UIKit.framework in Frameworks */,
+				75F94A9D1C1815E000FFF3AE /* Security.framework in Frameworks */,
+				75F94A9B1C1815D900FFF3AE /* OpenGLES.framework in Frameworks */,
+				75F94A991C1815D000FFF3AE /* MobileCoreServices.framework in Frameworks */,
+				75F94A971C1815C900FFF3AE /* MediaPlayer.framework in Frameworks */,
+				75F94A951C1815BC00FFF3AE /* QuartzCore.framework in Frameworks */,
+				75F94A931C1815AF00FFF3AE /* CoreText.framework in Frameworks */,
+				75F94A911C18159E00FFF3AE /* CoreLocation.framework in Frameworks */,
+				75F94A8F1C18159200FFF3AE /* CoreGraphics.framework in Frameworks */,
+				75F94A8D1C18158300FFF3AE /* AssetsLibrary.framework in Frameworks */,
+				75D5A218197CFC7C00EAE6D6 /* SystemConfiguration.framework in Frameworks */,
+				75D5A1D4197CF2EA00EAE6D6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75D5A1DD197CF2EA00EAE6D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75D5A1E8197CF2EA00EAE6D6 /* libFZISUtils.a in Frameworks */,
+				75D5A1E3197CF2EA00EAE6D6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		75D5A1C7197CF2E900EAE6D6 = {
+			isa = PBXGroup;
+			children = (
+				75D5A1D5197CF2EA00EAE6D6 /* FZISUtils */,
+				75D5A1E9197CF2EA00EAE6D6 /* FZISUtilsTests */,
+				75D5A1D2197CF2EA00EAE6D6 /* Frameworks */,
+				75D5A1D1197CF2EA00EAE6D6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		75D5A1D1197CF2EA00EAE6D6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				75D5A1D0197CF2EA00EAE6D6 /* libFZISUtils.a */,
+				75D5A1E0197CF2EA00EAE6D6 /* FZISUtilsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		75D5A1D2197CF2EA00EAE6D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75F94A9E1C1815E800FFF3AE /* UIKit.framework */,
+				75F94A9C1C1815E000FFF3AE /* Security.framework */,
+				75F94A9A1C1815D900FFF3AE /* OpenGLES.framework */,
+				75F94A981C1815D000FFF3AE /* MobileCoreServices.framework */,
+				75F94A961C1815C900FFF3AE /* MediaPlayer.framework */,
+				75F94A941C1815BC00FFF3AE /* QuartzCore.framework */,
+				75F94A921C1815AF00FFF3AE /* CoreText.framework */,
+				75F94A901C18159E00FFF3AE /* CoreLocation.framework */,
+				75F94A8E1C18159200FFF3AE /* CoreGraphics.framework */,
+				75F94A8C1C18158300FFF3AE /* AssetsLibrary.framework */,
+				75D5A217197CFC7C00EAE6D6 /* SystemConfiguration.framework */,
+				75D5A207197CF58C00EAE6D6 /* libxml2.dylib */,
+				75D5A1D3197CF2EA00EAE6D6 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		75D5A1D5197CF2EA00EAE6D6 /* FZISUtils */ = {
+			isa = PBXGroup;
+			children = (
+				75D5A202197CF55D00EAE6D6 /* GDataXML */,
+				75F94A871C18149D00FFF3AE /* ShpHelper */,
+				75F94A7B1C18117400FFF3AE /* ShpLib */,
+				75D5A20D197CF93600EAE6D6 /* GTMBase64.h */,
+				75D5A20E197CF93600EAE6D6 /* GTMBase64.m */,
+				75D5A20F197CF93600EAE6D6 /* GTMDefines.h */,
+				75D5A209197CF6F200EAE6D6 /* DESEncodeHelper.h */,
+				75D5A20A197CF6F200EAE6D6 /* DESEncodeHelper.m */,
+				75D5A1F9197CF35600EAE6D6 /* RequestPreprocessor.h */,
+				75D5A1FA197CF35600EAE6D6 /* RequestPreprocessor.m */,
+				75D5A1FB197CF35600EAE6D6 /* Utils.h */,
+				75D5A1FC197CF35600EAE6D6 /* Utils.m */,
+				7582DA851C5725360044C5D0 /* FZISMapView.h */,
+				7582DA861C5725360044C5D0 /* FZISMapView.m */,
+				7582DA891C5726B90044C5D0 /* FZISLineView.h */,
+				7582DA8A1C5726B90044C5D0 /* FZISLineView.m */,
+				7588D0881C47843D0084B05F /* FZISMeasurementTool.h */,
+				7588D0891C47843D0084B05F /* FZISMeasurementTool.m */,
+				7582DA611C5723980044C5D0 /* AGSSketchGraphicsLayer+exposePrivate.h */,
+				7582DA621C5723980044C5D0 /* AGSSketchGraphicsLayer+exposePrivate.m */,
+				7582DA631C5723980044C5D0 /* FZISGPSTool.h */,
+				7582DA641C5723980044C5D0 /* FZISGPSTool.m */,
+				7582DA651C5723980044C5D0 /* FZISNetworkTool.h */,
+				7582DA661C5723980044C5D0 /* FZISNetworkTool.m */,
+				7582DA671C5723980044C5D0 /* FZISQueryTool.h */,
+				7582DA681C5723980044C5D0 /* FZISQueryTool.m */,
+				7582DA691C5723980044C5D0 /* FZISSandboxTool.h */,
+				7582DA6A1C5723980044C5D0 /* FZISSandboxTool.m */,
+				7582DA711C5723980044C5D0 /* Reachability.h */,
+				7582DA721C5723980044C5D0 /* Reachability.m */,
+				75D5A1D6197CF2EA00EAE6D6 /* Supporting Files */,
+			);
+			path = FZISUtils;
+			sourceTree = "<group>";
+		};
+		75D5A1D6197CF2EA00EAE6D6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				75D5A1D7197CF2EA00EAE6D6 /* FZISUtils-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		75D5A1E9197CF2EA00EAE6D6 /* FZISUtilsTests */ = {
+			isa = PBXGroup;
+			children = (
+				75D5A1EF197CF2EA00EAE6D6 /* FZISUtilsTests.m */,
+				75D5A1EA197CF2EA00EAE6D6 /* Supporting Files */,
+			);
+			path = FZISUtilsTests;
+			sourceTree = "<group>";
+		};
+		75D5A1EA197CF2EA00EAE6D6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				75D5A1EB197CF2EA00EAE6D6 /* FZISUtilsTests-Info.plist */,
+				75D5A1EC197CF2EA00EAE6D6 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		75D5A202197CF55D00EAE6D6 /* GDataXML */ = {
+			isa = PBXGroup;
+			children = (
+				75D5A203197CF55D00EAE6D6 /* GDataXMLNode.h */,
+				75F94AA01C1829BA00FFF3AE /* GDataXMLNode.m */,
+			);
+			path = GDataXML;
+			sourceTree = "<group>";
+		};
+		75F94A7B1C18117400FFF3AE /* ShpLib */ = {
+			isa = PBXGroup;
+			children = (
+				756DB6811CE1D6E500103999 /* dbfopen.c */,
+				756DB6821CE1D6E500103999 /* shapefil.h */,
+				756DB6831CE1D6E500103999 /* shpopen.c */,
+				756DB6841CE1D6E500103999 /* shptree.c */,
+			);
+			name = ShpLib;
+			sourceTree = "<group>";
+		};
+		75F94A871C18149D00FFF3AE /* ShpHelper */ = {
+			isa = PBXGroup;
+			children = (
+				75F94A881C18149D00FFF3AE /* ShpHelper.h */,
+				75F94A891C18149D00FFF3AE /* ShpHelper.m */,
+			);
+			path = ShpHelper;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		75D5A1FF197CF38600EAE6D6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7582DA871C5725360044C5D0 /* FZISMapView.h in Headers */,
+				75D5A201197CF39B00EAE6D6 /* Utils.h in Headers */,
+				75D5A200197CF39B00EAE6D6 /* RequestPreprocessor.h in Headers */,
+				7582DA7B1C5723980044C5D0 /* FZISSandboxTool.h in Headers */,
+				75D5A20B197CF6F200EAE6D6 /* DESEncodeHelper.h in Headers */,
+				7582DA791C5723980044C5D0 /* FZISQueryTool.h in Headers */,
+				7588D08A1C47843D0084B05F /* FZISMeasurementTool.h in Headers */,
+				7582DA751C5723980044C5D0 /* FZISGPSTool.h in Headers */,
+				7582DA771C5723980044C5D0 /* FZISNetworkTool.h in Headers */,
+				7582DA831C5723980044C5D0 /* Reachability.h in Headers */,
+				7582DA8B1C5726B90044C5D0 /* FZISLineView.h in Headers */,
+				75F94A8A1C18149D00FFF3AE /* ShpHelper.h in Headers */,
+				75D5A210197CF93600EAE6D6 /* GTMBase64.h in Headers */,
+				75D5A205197CF55D00EAE6D6 /* GDataXMLNode.h in Headers */,
+				75D5A212197CF93600EAE6D6 /* GTMDefines.h in Headers */,
+				756DB6861CE1D6E500103999 /* shapefil.h in Headers */,
+				7582DA731C5723980044C5D0 /* AGSSketchGraphicsLayer+exposePrivate.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		75D5A1CF197CF2EA00EAE6D6 /* FZISUtils */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75D5A1F3197CF2EA00EAE6D6 /* Build configuration list for PBXNativeTarget "FZISUtils" */;
+			buildPhases = (
+				75D5A1CC197CF2EA00EAE6D6 /* Sources */,
+				75D5A1CD197CF2EA00EAE6D6 /* Frameworks */,
+				75D5A1CE197CF2EA00EAE6D6 /* CopyFiles */,
+				75D5A1FF197CF38600EAE6D6 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FZISUtils;
+			productName = FZISUtils;
+			productReference = 75D5A1D0197CF2EA00EAE6D6 /* libFZISUtils.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		75D5A1DF197CF2EA00EAE6D6 /* FZISUtilsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75D5A1F6197CF2EA00EAE6D6 /* Build configuration list for PBXNativeTarget "FZISUtilsTests" */;
+			buildPhases = (
+				75D5A1DC197CF2EA00EAE6D6 /* Sources */,
+				75D5A1DD197CF2EA00EAE6D6 /* Frameworks */,
+				75D5A1DE197CF2EA00EAE6D6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				75D5A1E7197CF2EA00EAE6D6 /* PBXTargetDependency */,
+			);
+			name = FZISUtilsTests;
+			productName = FZISUtilsTests;
+			productReference = 75D5A1E0197CF2EA00EAE6D6 /* FZISUtilsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		75D5A1C8197CF2E900EAE6D6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = FZIS;
+			};
+			buildConfigurationList = 75D5A1CB197CF2E900EAE6D6 /* Build configuration list for PBXProject "FZISUtils" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 75D5A1C7197CF2E900EAE6D6;
+			productRefGroup = 75D5A1D1197CF2EA00EAE6D6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				75D5A1CF197CF2EA00EAE6D6 /* FZISUtils */,
+				75D5A1DF197CF2EA00EAE6D6 /* FZISUtilsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		75D5A1DE197CF2EA00EAE6D6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75D5A1EE197CF2EA00EAE6D6 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		75D5A1CC197CF2EA00EAE6D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7588D08B1C47843D0084B05F /* FZISMeasurementTool.m in Sources */,
+				756DB6881CE1D6E500103999 /* shptree.c in Sources */,
+				75D5A1FD197CF35600EAE6D6 /* RequestPreprocessor.m in Sources */,
+				75D5A1FE197CF35600EAE6D6 /* Utils.m in Sources */,
+				7582DA881C5725360044C5D0 /* FZISMapView.m in Sources */,
+				7582DA7C1C5723980044C5D0 /* FZISSandboxTool.m in Sources */,
+				75D5A211197CF93600EAE6D6 /* GTMBase64.m in Sources */,
+				7582DA8C1C5726B90044C5D0 /* FZISLineView.m in Sources */,
+				75F94A8B1C18149D00FFF3AE /* ShpHelper.m in Sources */,
+				756DB6851CE1D6E500103999 /* dbfopen.c in Sources */,
+				756DB6871CE1D6E500103999 /* shpopen.c in Sources */,
+				7582DA761C5723980044C5D0 /* FZISGPSTool.m in Sources */,
+				75F94AA11C1829BA00FFF3AE /* GDataXMLNode.m in Sources */,
+				7582DA7A1C5723980044C5D0 /* FZISQueryTool.m in Sources */,
+				7582DA841C5723980044C5D0 /* Reachability.m in Sources */,
+				7582DA741C5723980044C5D0 /* AGSSketchGraphicsLayer+exposePrivate.m in Sources */,
+				7582DA781C5723980044C5D0 /* FZISNetworkTool.m in Sources */,
+				75D5A20C197CF6F200EAE6D6 /* DESEncodeHelper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75D5A1DC197CF2EA00EAE6D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75D5A1F0197CF2EA00EAE6D6 /* FZISUtilsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		75D5A1E7197CF2EA00EAE6D6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 75D5A1CF197CF2EA00EAE6D6 /* FZISUtils */;
+			targetProxy = 75D5A1E6197CF2EA00EAE6D6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		75D5A1EC197CF2EA00EAE6D6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				75D5A1ED197CF2EA00EAE6D6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		75D5A1F1197CF2EA00EAE6D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		75D5A1F2197CF2EA00EAE6D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		75D5A1F4197CF2EA00EAE6D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/FZISUtils.dst;
+				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/SDKs/ArcGIS/iOS/";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FZISUtils/FZISUtils-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					ArcGIS,
+					"-l",
+					"c++",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		75D5A1F5197CF2EA00EAE6D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/FZISUtils.dst;
+				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/SDKs/ArcGIS/iOS/";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FZISUtils/FZISUtils-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					ArcGIS,
+					"-l",
+					"c++",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		75D5A1F7197CF2EA00EAE6D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FZISUtils/FZISUtils-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "FZISUtilsTests/FZISUtilsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		75D5A1F8197CF2EA00EAE6D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FZISUtils/FZISUtils-Prefix.pch";
+				INFOPLIST_FILE = "FZISUtilsTests/FZISUtilsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		75D5A1CB197CF2E900EAE6D6 /* Build configuration list for PBXProject "FZISUtils" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75D5A1F1197CF2EA00EAE6D6 /* Debug */,
+				75D5A1F2197CF2EA00EAE6D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		75D5A1F3197CF2EA00EAE6D6 /* Build configuration list for PBXNativeTarget "FZISUtils" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75D5A1F4197CF2EA00EAE6D6 /* Debug */,
+				75D5A1F5197CF2EA00EAE6D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		75D5A1F6197CF2EA00EAE6D6 /* Build configuration list for PBXNativeTarget "FZISUtilsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75D5A1F7197CF2EA00EAE6D6 /* Debug */,
+				75D5A1F8197CF2EA00EAE6D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 75D5A1C8197CF2E900EAE6D6 /* Project object */;
+}
