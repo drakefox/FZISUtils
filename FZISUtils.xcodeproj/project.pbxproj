@@ -38,7 +38,7 @@
 		75D5A1FE197CF35600EAE6D6 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D5A1FC197CF35600EAE6D6 /* Utils.m */; };
 		75D5A200197CF39B00EAE6D6 /* RequestPreprocessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 75D5A1F9197CF35600EAE6D6 /* RequestPreprocessor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75D5A201197CF39B00EAE6D6 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 75D5A1FB197CF35600EAE6D6 /* Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		75D5A205197CF55D00EAE6D6 /* GDataXMLNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 75D5A203197CF55D00EAE6D6 /* GDataXMLNode.h */; };
+		75D5A205197CF55D00EAE6D6 /* GDataXMLNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 75D5A203197CF55D00EAE6D6 /* GDataXMLNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75D5A20B197CF6F200EAE6D6 /* DESEncodeHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 75D5A209197CF6F200EAE6D6 /* DESEncodeHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75D5A20C197CF6F200EAE6D6 /* DESEncodeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D5A20A197CF6F200EAE6D6 /* DESEncodeHelper.m */; };
 		75D5A210197CF93600EAE6D6 /* GTMBase64.h in Headers */ = {isa = PBXBuildFile; fileRef = 75D5A20D197CF93600EAE6D6 /* GTMBase64.h */; };
@@ -320,10 +320,10 @@
 				7582DA751C5723980044C5D0 /* FZISGPSTool.h in Headers */,
 				7582DA771C5723980044C5D0 /* FZISNetworkTool.h in Headers */,
 				7582DA831C5723980044C5D0 /* Reachability.h in Headers */,
+				75D5A205197CF55D00EAE6D6 /* GDataXMLNode.h in Headers */,
 				7582DA8B1C5726B90044C5D0 /* FZISLineView.h in Headers */,
 				75F94A8A1C18149D00FFF3AE /* ShpHelper.h in Headers */,
 				75D5A210197CF93600EAE6D6 /* GTMBase64.h in Headers */,
-				75D5A205197CF55D00EAE6D6 /* GDataXMLNode.h in Headers */,
 				75D5A212197CF93600EAE6D6 /* GTMDefines.h in Headers */,
 				756DB6861CE1D6E500103999 /* shapefil.h in Headers */,
 				7582DA731C5723980044C5D0 /* AGSSketchGraphicsLayer+exposePrivate.h in Headers */,
