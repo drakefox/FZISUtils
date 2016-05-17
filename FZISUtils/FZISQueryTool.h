@@ -15,7 +15,7 @@
 
 
 @interface FZISQueryTool : NSObject
-<AGSMapViewTouchDelegate,FZISLineViewDelegate,FZISNetworkToolDelegate,AGSIdentifyTaskDelegate>
+<AGSMapViewTouchDelegate,FZISLineViewDelegate,FZISNetworkToolDelegate,AGSIdentifyTaskDelegate, AGSQueryTaskDelegate>
 {
     FZISMapView *_mapView;
     FZISLineView *_lineView;
@@ -27,8 +27,12 @@
     NSMutableArray *_tiledLayerIds;
     NSMutableArray *_tiledLayerNames;
     
+    NSMutableDictionary *_layerNameDic;
+    
     AGSIdentifyTask *_identifyTask;
     AGSIdentifyParameters *_identifyParams;
+    
+    NSMutableDictionary *_queryTasks;
 }
 
 @property (nonatomic, retain) id<FZISQueryToolDelegate> delegate;
@@ -38,6 +42,7 @@
 - (FZISQueryTool *)initWithMapView:(FZISMapView *)mapView;
 - (void)startSpatialQuery;
 - (void)stopSpatialQuery;
+- (void)startSearchWithKeyword:(NSString *)keyword;
 
 @end
 

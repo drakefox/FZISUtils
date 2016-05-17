@@ -24,6 +24,9 @@
         _results = [[NSMutableDictionary alloc] init];
         _networkTool = [[FZISNetworkTool alloc] init];
         _networkTool.delegate = self;
+        
+        _queryTasks = [[NSMutableDictionary alloc] init];
+        _layerNameDic = [[NSMutableDictionary alloc] init];
     }
     
     return self;
@@ -56,6 +59,27 @@
     _lineView.penShape = kShapeFreeLine;
     _lineView.lineViewDelegate = self;
     [_mapView addSubview:_lineView];
+}
+
+
+- (void)startSearchWithKeyword:(NSString *)keyword{
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(FZISQueryToolWillExecute)]) {
+        [self.delegate FZISQueryToolWillExecute];
+    }
+    
+    [self performSelectorInBackground:@selector(queryResultMonitor) withObject:nil];
+    
+    if ([_mapView.TILEDLayers count] > 0) {
+        [self performSelector:@selector(queryFeaturesOnTILEDLayersWithKeyword:) withObject:keyword afterDelay:0.5];
+    }
+    
+    if ([_mapView.GDBLayers count] > 0) {
+        [self performSelectorInBackground:@selector(queryFeaturesOnGDBLayersWithKeyword:) withObject:keyword];
+    }
+    
+    if ([_mapView.SHPLayers count] > 0) {
+        [self performSelector:@selector(queryFeaturesOnSHPLayersWithKeyword:) withObject:keyword afterDelay:0.5];
+    }
 }
 
 
@@ -172,6 +196,28 @@
 
 }
 
+
+- (void)queryFeaturesOnGDBLayersWithKeyword:(NSString *)keyword
+{
+    for (NSString *layerName in _mapView.GDBLayers) {
+        AGSFeatureTableLayer *layer = (AGSFeatureTableLayer *)[_mapView mapLayerForName:layerName];
+        NSString *nameField = [_mapView.nameFieldSettings objectForKey:layerName];
+        AGSQuery *query = [[AGSQuery alloc] init];
+        query.whereClause = [NSString stringWithFormat:@"%@ like %%%@%%", nameField, keyword];
+        
+        [layer.table queryResultsWithParameters:query completion:^(NSArray *results, NSError *error) {
+            if (error == nil) {
+                [_results setObject:results forKey:layerName];
+            }
+            else
+            {
+                [_results setObject:[NSArray array] forKey:layerName];
+            }
+        }];
+    }
+}
+
+
 - (void)queryFeaturesOnTILEDLayersWithParams:(NSDictionary *)params
 {
     AGSGeometry *geometry = [params objectForKey:@"geometry"];
@@ -192,6 +238,29 @@
         [self onlineSpatialQuery:_tiledLayerIds queryGeometry:geometry];
     }
 }
+
+- (void)queryFeaturesOnTILEDLayersWithKeyword:(NSString *)keyword
+{
+//    AGSGeometry *geometry = [params objectForKey:@"geometry"];
+    NSString *urlStr = [NSString stringWithFormat:@"%@?f=json&pretty=true", [_mapView.mapServerInfo objectForKey:@"BaseUrl"], nil];
+    _networkTool.url = [NSURL URLWithString:urlStr];
+    NSDictionary *requestRes = [_networkTool sendRequestByGET];
+    if ([requestRes objectForKey:@"error"] != nil) {
+        for (NSString *layerName in _mapView.TILEDLayers) {
+            [_results setObject:[NSArray array] forKey:layerName];
+        }
+    }
+    else
+    {
+        NSDictionary *layerInfo = [NSJSONSerialization JSONObjectWithData:[requestRes objectForKey:@"data"] options:NSJSONReadingMutableLeaves error:nil];
+        NSArray *layerList = [NSArray arrayWithArray:[layerInfo objectForKey:@"layers"]];
+        _tiledLayerIds = [self getLayerIdsByLayerNames:_mapView.TILEDLayers inLayerList:layerList];
+        _tiledLayerNames = [self getLayerNamesByLayerIds:_tiledLayerIds inLayerList:layerList];
+        [self onlineKeywordSearch:_tiledLayerIds Keyword:keyword];
+    }
+}
+
+
 
 - (void)queryFeaturesOnSHPLayersWithParams:(NSDictionary *)params
 {
@@ -255,6 +324,31 @@
     }
 }
 
+- (void)queryFeaturesOnSHPLayersWithKeyword:(NSString *)keyword
+{
+    for (NSString *layerName in _mapView.SHPLayers) {
+        
+        NSMutableArray *featuresOnLayer = [[NSMutableArray alloc] init];
+        
+        AGSLayer *layerView =[_mapView mapLayerForName:layerName];
+        AGSGraphicsLayer *layer = (AGSGraphicsLayer*)layerView;
+        NSMutableArray *graphicsData = [[NSMutableArray alloc] initWithArray:layer.graphics];
+        
+        NSString *nameField = [_mapView.nameFieldSettings objectForKey:layerName];
+        
+        for (int i = 0; i < [graphicsData count]; i++) {//查找符合条件的图形
+            AGSGraphic * graphic = [graphicsData objectAtIndex:i];
+            NSDictionary *attributes = [graphic allAttributes];
+            NSString *fieldValue = [attributes objectForKey:nameField];
+            if ([fieldValue rangeOfString:keyword].length > 0) {
+                [featuresOnLayer addObject:graphic];
+            }
+        }
+        
+        [_results setObject:featuresOnLayer forKey:layerName];
+    }
+}
+
 - (void)onlineSpatialQuery:(NSArray *)layerIds queryGeometry:(AGSGeometry *)queryGeo
 {
     AGSGeometryType geometryType = AGSGeometryTypeForGeometry(queryGeo);
@@ -277,6 +371,30 @@
     
     //execute the task
     [_identifyTask executeWithParameters:_identifyParams];
+    
+}
+
+- (void)onlineKeywordSearch:(NSArray *)layerIds Keyword:(NSString *)keyword
+{
+    NSString *baseUrl = [_mapView.mapServerInfo objectForKey:@"BaseUrl"];
+    
+    for (int i = 0; i < [layerIds count]; i++) {
+        int layerId = [[layerIds objectAtIndex:i] integerValue];
+        NSString *layerUrl = [NSString stringWithFormat:@"%@/%d", baseUrl, layerId];
+        AGSQueryTask *queryTask = [AGSQueryTask queryTaskWithURL:[NSURL URLWithString:layerUrl]];
+        queryTask.delegate = self;
+        
+        NSString *layerName = [_layerNameDic objectForKey:[layerIds objectAtIndex:i]];
+        
+        NSString *nameField = [_mapView.nameFieldSettings objectForKey:layerName];
+        
+        AGSQuery *query = [[AGSQuery alloc] init];
+        query.whereClause = [NSString stringWithFormat:@"%@ like %%%@%%", nameField, keyword];
+        
+        [_queryTasks setObject:queryTask forKey:layerName];
+        
+        [queryTask executeWithQuery:query];
+    }
     
 }
 
@@ -318,6 +436,33 @@
     }
 }
 
+- (void)queryTask:(AGSQueryTask *)queryTask operation:(NSOperation *)op didExecuteWithFeatureSetResult:(AGSFeatureSet *)featureSet
+{
+    NSString *layerName = @"";
+    for (NSString *tmpLayerName in _tiledLayerNames) {
+        AGSQueryTask *task = [_queryTasks objectForKey:tmpLayerName];
+        if ([task isEqual:queryTask]) {
+            layerName = tmpLayerName;
+            break;
+        }
+    }
+    [_results setObject:[featureSet features] forKey:layerName];
+}
+
+- (void)queryTask:(AGSQueryTask *)queryTask operation:(NSOperation *)op didFailWithError:(NSError *)error
+{
+    NSString *layerName = @"";
+    for (NSString *tmpLayerName in _tiledLayerNames) {
+        AGSQueryTask *task = [_queryTasks objectForKey:tmpLayerName];
+        if ([task isEqual:queryTask]) {
+            layerName = tmpLayerName;
+            break;
+        }
+    }
+    
+    [_results setObject:[NSArray array] forKey:layerName];
+}
+
 - (NSMutableArray *)getLayerIdsByLayerNames:(NSArray *)layerNames inLayerList:(NSArray *)layerList
 {
     NSMutableArray *layerIds = [[NSMutableArray alloc] init];
@@ -345,6 +490,7 @@
         NSString *layerName = [layerInfo objectForKey:@"name"];
         if ([layerIds containsObject:layerId]) {
             [layerNames addObject:layerName];
+            [_layerNameDic setObject:layerName forKey:layerId];
         }
     }
     return layerNames;
