@@ -33,6 +33,8 @@
     AGSIdentifyParameters *_identifyParams;
     
     NSMutableDictionary *_queryTasks;
+    
+    AGSLayer *_statisticLayer;
 }
 
 @property (nonatomic, retain) id<FZISQueryToolDelegate> delegate;
@@ -43,6 +45,7 @@
 - (void)startSpatialQuery;
 - (void)stopSpatialQuery;
 - (void)startSearchWithKeyword:(NSString *)keyword;
+- (void)startStatisticOnLayer:(AGSLayer *)layer;
 
 @end
 
@@ -52,6 +55,7 @@
 @optional
 
 - (void)FZISQueryTool:(FZISQueryTool *)queryTool didExecuteWithQueryResult:(NSDictionary *)result;
+- (void)FZISQueryTool:(FZISQueryTool *)queryTool didExecuteWithStatisticResult:(NSDictionary *)result;
 - (void)FZISQueryToolWillExecute;
 
 @end

@@ -27,6 +27,8 @@
         
         _queryTasks = [[NSMutableDictionary alloc] init];
         _layerNameDic = [[NSMutableDictionary alloc] init];
+        
+        _statisticLayer = nil;
     }
     
     return self;
@@ -51,6 +53,20 @@
 
 - (void)startSpatialQuery
 {
+    if (!_lineView) {
+        _lineView = [[FZISLineView alloc] initWithFrame:_mapView.bounds];
+    }
+    _lineView.penColor = [UIColor redColor];
+    _lineView.penWidth = 1.0;
+    _lineView.penShape = kShapeFreeLine;
+    _lineView.lineViewDelegate = self;
+    [_mapView addSubview:_lineView];
+}
+
+- (void)startStatisticOnLayer:(AGSLayer *)layer
+{
+    _statisticLayer = layer;
+    
     if (!_lineView) {
         _lineView = [[FZISLineView alloc] initWithFrame:_mapView.bounds];
     }
@@ -125,67 +141,42 @@
     
     NSDictionary *queryParams = [[NSDictionary alloc] initWithObjectsAndKeys:polygon, @"geometry", nil];
     
-    [self performSelectorInBackground:@selector(queryResultMonitor) withObject:nil];
-    
-    if ([_mapView.TILEDLayers count] > 0) {
-        [self performSelector:@selector(queryFeaturesOnTILEDLayersWithParams:) withObject:queryParams afterDelay:0.5];
+    if (_statisticLayer != nil) {
+        [self caculateFeaturesOnLayerWithParams:queryParams];
     }
-    
-    if ([_mapView.GDBLayers count] > 0) {
-        [self performSelectorInBackground:@selector(queryFeaturesOnGDBLayersWithParams:) withObject:queryParams];
+    else
+    {
+        [self performSelectorInBackground:@selector(queryResultMonitor) withObject:nil];
+        
+        if ([_mapView.TILEDLayers count] > 0) {
+            [self performSelector:@selector(queryFeaturesOnTILEDLayersWithParams:) withObject:queryParams afterDelay:0.5];
+        }
+        
+        if ([_mapView.GDBLayers count] > 0) {
+            [self performSelectorInBackground:@selector(queryFeaturesOnGDBLayersWithParams:) withObject:queryParams];
+        }
+        
+        if ([_mapView.SHPLayers count] > 0) {
+            [self performSelector:@selector(queryFeaturesOnSHPLayersWithParams:) withObject:queryParams afterDelay:0.5];
+        }
     }
-    
-    if ([_mapView.SHPLayers count] > 0) {
-        [self performSelector:@selector(queryFeaturesOnSHPLayersWithParams:) withObject:queryParams afterDelay:0.5];
-    }
-    
-    
 }
 
 - (void)queryFeaturesOnGDBLayersWithParams:(NSDictionary *)params;
 {
     //native api version, may throw exception due to the data defections
-//    AGSGeometry *geometry = [params objectForKey:@"geometry"];
-//    
-//    for (NSString *layerName in _mapView.GDBLayers) {
-//        AGSFeatureTableLayer *layer = (AGSFeatureTableLayer *)[_mapView mapLayerForName:layerName];
-//        AGSQuery *query = [[AGSQuery alloc] init];
-//        if (geometry != nil) {
-//            query.geometry = geometry;
-//            query.spatialRelationship = AGSSpatialRelationshipIntersects;
-//        }
-//        [layer.table queryResultsWithParameters:query completion:^(NSArray *results, NSError *error) {
-//            if (error == nil) {
-//                [_results setObject:results forKey:layerName];
-//            }
-//            else
-//            {
-//                [_results setObject:[NSArray array] forKey:layerName];
-//            }
-//        }];
-//    }
-//
-
-    
-    //==================================================================================================
-    
-    //walkarround version, perform the spatial query ourselves
     AGSGeometry *geometry = [params objectForKey:@"geometry"];
     
     for (NSString *layerName in _mapView.GDBLayers) {
         AGSFeatureTableLayer *layer = (AGSFeatureTableLayer *)[_mapView mapLayerForName:layerName];
         AGSQuery *query = [[AGSQuery alloc] init];
+        if (geometry != nil) {
+            query.geometry = geometry;
+            query.spatialRelationship = AGSSpatialRelationshipIntersects;
+        }
         [layer.table queryResultsWithParameters:query completion:^(NSArray *results, NSError *error) {
             if (error == nil) {
-                NSMutableArray *arrRes = [[NSMutableArray alloc] init];
-                AGSGeometryEngine *engine = [AGSGeometryEngine defaultGeometryEngine];
-                for (AGSGDBFeature *feature in results) {
-                    if ([engine geometry:geometry intersectsGeometry:feature.geometry]) {
-                        [arrRes addObject:feature];
-                    }
-                }
-                
-                [_results setObject:arrRes forKey:layerName];
+                [_results setObject:results forKey:layerName];
             }
             else
             {
@@ -194,16 +185,47 @@
         }];
     }
 
+
+    
+    //==================================================================================================
+    
+    //walkarround version, perform the spatial query ourselves
+//    AGSGeometry *geometry = [params objectForKey:@"geometry"];
+//    
+//    for (NSString *layerName in _mapView.GDBLayers) {
+//        AGSFeatureTableLayer *layer = (AGSFeatureTableLayer *)[_mapView mapLayerForName:layerName];
+//        AGSQuery *query = [[AGSQuery alloc] init];
+//        [layer.table queryResultsWithParameters:query completion:^(NSArray *results, NSError *error) {
+//            if (error == nil) {
+//                NSMutableArray *arrRes = [[NSMutableArray alloc] init];
+//                AGSGeometryEngine *engine = [AGSGeometryEngine defaultGeometryEngine];
+//                for (AGSGDBFeature *feature in results) {
+//                    if ([engine geometry:geometry intersectsGeometry:feature.geometry]) {
+//                        [arrRes addObject:feature];
+//                    }
+//                }
+//                
+//                [_results setObject:arrRes forKey:layerName];
+//            }
+//            else
+//            {
+//                [_results setObject:[NSArray array] forKey:layerName];
+//            }
+//        }];
+//    }
+
 }
 
 
 - (void)queryFeaturesOnGDBLayersWithKeyword:(NSString *)keyword
 {
     for (NSString *layerName in _mapView.GDBLayers) {
+//        NSLog(@"%@/%@", layerName, keyword);
         AGSFeatureTableLayer *layer = (AGSFeatureTableLayer *)[_mapView mapLayerForName:layerName];
         NSString *nameField = [_mapView.nameFieldSettings objectForKey:layerName];
         AGSQuery *query = [[AGSQuery alloc] init];
-        query.whereClause = [NSString stringWithFormat:@"%@ like %%%@%%", nameField, keyword];
+        query.whereClause = [NSString stringWithFormat:@"%@ like '%%%@%%'", nameField, keyword];
+//        NSLog(@"%@", query.whereClause);
         
         [layer.table queryResultsWithParameters:query completion:^(NSArray *results, NSError *error) {
             if (error == nil) {
@@ -217,6 +239,34 @@
     }
 }
 
+- (void)caculateFeaturesOnLayerWithParams:(NSDictionary *)params
+{
+    AGSFeatureTableLayer *ftLayer = (AGSFeatureTableLayer *)_statisticLayer;
+    AGSGeometry *geometry = [params objectForKey:@"geometry"];
+    AGSQuery *query = [[AGSQuery alloc] init];
+    query.geometry = geometry;
+    query.spatialRelationship = AGSSpatialRelationshipIntersects;
+    AGSOutStatistic *statistic = [[AGSOutStatistic alloc] init];
+    statistic.statisticType = AGSQueryStatisticsTypeSum;
+    statistic.onStatisticField = @"YDMJ";
+    statistic.outStatisticFieldName = @"YDMJ";
+    query.outStatistics = @[statistic];
+    query.groupByFieldsForStatistics = @[@"CGLBDM"];
+    query.returnGeometry = NO;
+    
+    NSMutableDictionary *statisticRes = [[NSMutableDictionary alloc] init];
+    
+    [ftLayer.table queryResultsWithParameters:query completion:^(NSArray *results, NSError *error) {
+        if (error == nil) {
+            for (NSDictionary *result in results) {
+                [statisticRes setObject:[result objectForKey:@"YDMJ"] forKey:[result objectForKey:@"CGLBDM"]];
+            }
+        }
+        if (self.delegate != nil && [self.delegate respondsToSelector:@selector(FZISQueryTool:didExecuteWithStatisticResult:)]) {
+            [self.delegate FZISQueryTool:self didExecuteWithStatisticResult:statisticRes];
+        }
+    }];
+}
 
 - (void)queryFeaturesOnTILEDLayersWithParams:(NSDictionary *)params
 {
@@ -379,8 +429,8 @@
     NSString *baseUrl = [_mapView.mapServerInfo objectForKey:@"BaseUrl"];
     
     for (int i = 0; i < [layerIds count]; i++) {
-        int layerId = [[layerIds objectAtIndex:i] integerValue];
-        NSString *layerUrl = [NSString stringWithFormat:@"%@/%d", baseUrl, layerId];
+        NSInteger layerId = [[layerIds objectAtIndex:i] integerValue];
+        NSString *layerUrl = [NSString stringWithFormat:@"%@/%ld", baseUrl, (long)layerId];
         AGSQueryTask *queryTask = [AGSQueryTask queryTaskWithURL:[NSURL URLWithString:layerUrl]];
         queryTask.delegate = self;
         
