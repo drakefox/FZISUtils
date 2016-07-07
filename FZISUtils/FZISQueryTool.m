@@ -244,23 +244,36 @@
     AGSFeatureTableLayer *ftLayer = (AGSFeatureTableLayer *)_statisticLayer;
     AGSGeometry *geometry = [params objectForKey:@"geometry"];
     AGSQuery *query = [[AGSQuery alloc] init];
+    if ([geometry isEmpty]) {
+        NSLog(@"holy shit");
+    }
+    
     query.geometry = geometry;
     query.spatialRelationship = AGSSpatialRelationshipIntersects;
-    AGSOutStatistic *statistic = [[AGSOutStatistic alloc] init];
-    statistic.statisticType = AGSQueryStatisticsTypeSum;
-    statistic.onStatisticField = @"YDMJ";
-    statistic.outStatisticFieldName = @"YDMJ";
-    query.outStatistics = @[statistic];
-    query.groupByFieldsForStatistics = @[@"CGLBDM"];
+//    AGSOutStatistic *statistic = [[AGSOutStatistic alloc] init];
+//    statistic.statisticType = AGSQueryStatisticsTypeSum;
+//    statistic.onStatisticField = @"YDMJ";
+//    statistic.outStatisticFieldName = @"YDMJ";
+//    query.outStatistics = @[statistic];
+//    query.groupByFieldsForStatistics = @[@"CGLBDM"];
     query.returnGeometry = NO;
     
     NSMutableDictionary *statisticRes = [[NSMutableDictionary alloc] init];
     
     [ftLayer.table queryResultsWithParameters:query completion:^(NSArray *results, NSError *error) {
         if (error == nil) {
-            for (NSDictionary *result in results) {
-                [statisticRes setObject:[result objectForKey:@"YDMJ"] forKey:[result objectForKey:@"CGLBDM"]];
-            }
+//            for (NSDictionary *result in results) {
+//                [statisticRes setObject:[result objectForKey:@"YDMJ"] forKey:[result objectForKey:@"CGLBDM"]];
+//            }
+//            for (AGSGDBFeature *feature in results) {
+//                NSString *code = [[[feature allAttributes] objectForKey:@"CGLBDM"] substringToIndex:1];
+//                double area = [[[feature allAttributes] objectForKey:@"YDMJ"] doubleValue];
+//                if ([statisticRes.allKeys containsObject:code]) {
+//                    double currValue = [[statisticRes objectForKey:code] doubleValue];
+//                    currValue = currValue + area;
+//                    [statisticRes setObject:[ns] forKey:code];
+//                }
+//            }
         }
         if (self.delegate != nil && [self.delegate respondsToSelector:@selector(FZISQueryTool:didExecuteWithStatisticResult:)]) {
             [self.delegate FZISQueryTool:self didExecuteWithStatisticResult:statisticRes];
