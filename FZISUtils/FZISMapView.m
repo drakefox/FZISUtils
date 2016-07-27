@@ -42,9 +42,9 @@
     [sketchLayer setAntialias:YES];
     [self addMapLayer:sketchLayer withName:@"SketchLayer"];//顶层草图
 
-//    [self loadLayer:@"poi"];
-//    AGSLayer *layerView = [self mapLayerForName:@"poi"];
-//    layerView.opacity = 0.0;
+    [self loadGDBLayer:@"热点"];
+    AGSLayer *layerView = [self mapLayerForName:@"热点"];
+    layerView.opacity = 0.0;
     
     self.callout.delegate = self;
     self.touchDelegate = self;

@@ -44,7 +44,7 @@
     }
     
     [_mapView.sketchLayer removeAllGraphics];
-    queryGraphic = nil;
+    queryGraphic = [[AGSGraphic alloc] init];
     
     if (self.delegate != nil && [self.delegate respondsToSelector:@selector(FZISQueryTool:didExecuteWithQueryResult:)]) {
         [self.delegate FZISQueryTool:self didExecuteWithQueryResult:results];
@@ -96,6 +96,30 @@
     if ([_mapView.SHPLayers count] > 0) {
         [self performSelector:@selector(queryFeaturesOnSHPLayersWithKeyword:) withObject:keyword afterDelay:0.5];
     }
+}
+
+- (void)startSearchWithKeyword:(NSString *)keyword onLayer:(NSString *)layerName{
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(FZISQueryToolWillExecute)]) {
+        [self.delegate FZISQueryToolWillExecute];
+    }
+    
+    AGSFeatureTableLayer *layer = (AGSFeatureTableLayer *)[_mapView mapLayerForName:layerName];
+    NSString *nameField = @"NAME";//[_mapView.nameFieldSettings objectForKey:layerName];
+    AGSQuery *query = [[AGSQuery alloc] init];
+    query.whereClause = [NSString stringWithFormat:@"%@ like '%%%@%%'", nameField, keyword];
+    //        NSLog(@"%@", query.whereClause);
+    
+    [layer.table queryResultsWithParameters:query completion:^(NSArray *results, NSError *error) {
+        if (error == nil) {
+            [_results setObject:results forKey:layerName];
+        }
+        else
+        {
+            [_results setObject:[NSArray array] forKey:layerName];
+        }
+        
+        [self notifyQueryDone];
+    }];
 }
 
 
@@ -244,9 +268,6 @@
     AGSFeatureTableLayer *ftLayer = (AGSFeatureTableLayer *)_statisticLayer;
     AGSGeometry *geometry = [params objectForKey:@"geometry"];
     AGSQuery *query = [[AGSQuery alloc] init];
-    if ([geometry isEmpty]) {
-        NSLog(@"holy shit");
-    }
     
     query.geometry = geometry;
     query.spatialRelationship = AGSSpatialRelationshipIntersects;
@@ -571,6 +592,7 @@
 
 - (void)notifyQueryDone
 {
+//    [NSThread sleepForTimeInterval:5];
     if (self.delegate != nil && [self.delegate respondsToSelector:@selector(FZISQueryTool:didExecuteWithQueryResult:)]) {
         [self.delegate FZISQueryTool:self didExecuteWithQueryResult:_results];
     }
