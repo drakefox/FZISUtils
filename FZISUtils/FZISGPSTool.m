@@ -34,7 +34,12 @@
         [alert show];
     }
     
-    _locationDisplay.autoPanMode = AGSLocationDisplayAutoPanModeDefault;
+//    _locationDisplay.autoPanMode = AGSLocationDisplayAutoPanModeDefault;
+    _locationDisplay.autoPanMode = AGSLocationDisplayAutoPanModeCompassNavigation;
+    
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    _locationDisplay.interfaceOrientation = orientation;
     _locationDisplay.wanderExtentFactor = 0;
     [_locationDisplay startDataSource];
 }

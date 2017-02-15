@@ -11,6 +11,7 @@
 @implementation FZISNetworkTool
 
 @synthesize url;
+@synthesize name;
 
 - (FZISNetworkTool *)initWithURL:(NSString *)urlString
 {
@@ -62,7 +63,13 @@
             }
         }];
     }
-    
+    else
+    {
+        NSError *error = [[NSError alloc] init];
+        if (self.delegate != nil && [self.delegate respondsToSelector:@selector(FZISNetworkTool:didGetError:)]) {
+            [self.delegate FZISNetworkTool:self didGetError:error];
+        }
+    }
     
 }
 
@@ -73,6 +80,7 @@
     if ([self isRemoteHostReachable])
     {
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:self.url];
+        
         [request setTimeoutInterval:10];
         NSURLResponse *response;
         NSError *error;

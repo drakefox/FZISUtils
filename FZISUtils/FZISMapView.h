@@ -30,6 +30,7 @@
 #define kLayerTypeSHP 20
 #define kLayerTypeTILED 21
 #define kLayerTypeGDB 22
+#define kLayerTypeRT 23
 
 @interface FZISMapView : AGSMapView
 <AGSCalloutDelegate,AGSMapViewLayerDelegate,AGSMapViewTouchDelegate>

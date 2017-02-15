@@ -42,9 +42,14 @@
     [sketchLayer setAntialias:YES];
     [self addMapLayer:sketchLayer withName:@"SketchLayer"];//顶层草图
 
-    [self loadGDBLayer:@"热点"];
-    AGSLayer *layerView = [self mapLayerForName:@"热点"];
-    layerView.opacity = 0.0;
+//    [self loadGDBLayer:@"热点"];
+//    AGSLayer *layerView = [self mapLayerForName:@"热点"];
+//    layerView.opacity = 0.0;
+    
+//    [self loadGDBLayer:@"开盖报警点"];
+//    AGSLayer *layerViewOpenAlarm = [self mapLayerForName:@"开盖报警点"];
+//    layerViewOpenAlarm.opacity = 0.0;
+
     
     self.callout.delegate = self;
     self.touchDelegate = self;
@@ -848,6 +853,12 @@
 
 - (void)stopLocationDisplay
 {
+    double angle = self.rotationAngle;
+    
+    if (angle != 0) {
+        [self setRotationAngle:0 animated:YES];
+    }
+    
     [_gpsTool stopLocationDisplay];
 }
 

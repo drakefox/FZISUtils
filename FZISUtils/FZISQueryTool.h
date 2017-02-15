@@ -46,6 +46,7 @@
 - (void)stopSpatialQuery;
 - (void)startSearchWithKeyword:(NSString *)keyword;
 - (void)startSearchWithKeyword:(NSString *)keyword onLayer:(NSString *)layerName;
+- (void)startSearchWithKeyword:(NSString *)keyword onLayers:(NSArray *)layers;
 - (void)startStatisticOnLayer:(AGSLayer *)layer;
 
 @end

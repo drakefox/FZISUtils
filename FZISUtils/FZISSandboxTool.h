@@ -12,7 +12,7 @@
 #import "FZISLineView.h"
 
 @interface FZISSandboxTool : NSObject
-<FZISLineViewDelegate>
+<FZISLineViewDelegate,CALayerDelegate>
 {
     FZISMapView *_mapView;
     BOOL _isImageSaved;

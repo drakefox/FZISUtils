@@ -15,6 +15,7 @@
 {
     
 }
+@property (nonatomic, retain) NSString *name;
 
 @property (nonatomic, retain) NSURL *url;
 @property (nonatomic, retain) id<FZISNetworkToolDelegate> delegate;

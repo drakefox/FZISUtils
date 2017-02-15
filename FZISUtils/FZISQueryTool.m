@@ -123,6 +123,43 @@
 }
 
 
+- (void)startSearchWithKeyword:(NSString *)keyword onLayers:(NSArray *)layers{
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(FZISQueryToolWillExecute)]) {
+        [self.delegate FZISQueryToolWillExecute];
+    }
+    
+    NSMutableArray *validLayers = [[NSMutableArray alloc] init];
+    
+    for (NSString *layerName in layers) {
+        AGSFeatureTableLayer *layer = (AGSFeatureTableLayer *)[_mapView mapLayerForName:layerName];
+        if (layer != nil) {
+            [validLayers addObject:layerName];
+        }
+    }
+    
+    for (NSString *layerName in validLayers) {
+        AGSFeatureTableLayer *layer = (AGSFeatureTableLayer *)[_mapView mapLayerForName:layerName];
+        NSString *nameField = [_mapView.nameFieldSettings objectForKey:layerName];
+        AGSQuery *query = [[AGSQuery alloc] init];
+        query.whereClause = [NSString stringWithFormat:@"%@ like '%%%@%%'", nameField, keyword];
+        //        NSLog(@"%@", query.whereClause);
+        
+        [layer.table queryResultsWithParameters:query completion:^(NSArray *results, NSError *error) {
+            if (error == nil) {
+                [_results setObject:results forKey:layerName];
+            }
+            else
+            {
+                [_results setObject:[NSArray array] forKey:layerName];
+            }
+            
+            [self queryResultCheckForLayers:validLayers];
+        }];
+    }
+    
+    
+}
+
 - (void)lineViewTouchesBegan:(FZISLineView *)lineView
 {
     [_mapView.sketchLayer removeAllGraphics];
@@ -192,7 +229,15 @@
     AGSGeometry *geometry = [params objectForKey:@"geometry"];
     
     for (NSString *layerName in _mapView.GDBLayers) {
+        
+        //check whether this layer is visible - EriChen@2017.2.15
         AGSFeatureTableLayer *layer = (AGSFeatureTableLayer *)[_mapView mapLayerForName:layerName];
+        if (![layer isInScale]) {
+            [_results setObject:[NSArray array] forKey:layerName];
+            continue;
+        }
+        
+        
         AGSQuery *query = [[AGSQuery alloc] init];
         if (geometry != nil) {
             query.geometry = geometry;
@@ -588,6 +633,14 @@
 //        NSLog(@"%ld/%ld", [_results count], [_mapView.SHPLayers count] + [_mapView.TILEDLayers count] + [_mapView.GDBLayers count], nil);
     }
     [self performSelectorOnMainThread:@selector(notifyQueryDone) withObject:nil waitUntilDone:YES];
+}
+
+- (void)queryResultCheckForLayers:(NSArray *)layers
+{
+    if(_results.count == [layers count])
+    {
+        [self notifyQueryDone];
+    }
 }
 
 - (void)notifyQueryDone
