@@ -10,6 +10,7 @@
 #import "DESEncodeHelper.h"
 #import "MDFiveDigestHelper.h"
 #import "GDataXMLNode.h"
+#import "UUIDUtils.h"
 
 #import <sys/stat.h>
 #import <dirent.h>
@@ -18,6 +19,10 @@
 #include <net/if.h>
 #include <net/if_dl.h>
 #include <ifaddrs.h>
+
+#import <SystemConfiguration/CaptiveNetwork.h>
+#import <NetworkExtension/NetworkExtension.h>
+#import <AdSupport/AdSupport.h>
 
 #define kHasAuthed          @"HasAuthed"
 #define kHasExperience      @"HasExperience"
@@ -28,9 +33,11 @@
 #define kIsCacheNeeded      @"IsCacheNeeded"
 #define kIsEncodeNeeded     @"IsEncodeNeeded"
 #define kExpireTime         @"ExpireTime"
+#define kCheckPointTime     @"CheckPointTime"
 #define kAUFilePath         @"AUFilePath"
 #define kUsedTimes          @"UsedTimes"
 #define kProjType           @"ProjType"
+#define kUUID               @"UUID"
 
 #define kBusinessView       @"BusinessView"
 #define kMainMenu           @"MainMenu"
@@ -86,6 +93,20 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
++ (NSString *)checkPointTime
+{
+    NSString *value = [[NSUserDefaults standardUserDefaults] valueForKey:kCheckPointTime];
+    NSString *decValue = [DESEncodeHelper decryptWithText:value];
+    return decValue;
+}
+
++ (void)setCheckPointTime:(NSString *)checkPointTime
+{
+    NSString *value = [DESEncodeHelper encryptWithText:checkPointTime];
+    [[NSUserDefaults standardUserDefaults] setValue:value forKey:kCheckPointTime];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 + (NSString *)usedTimes
 {
     NSString *value = [[NSUserDefaults standardUserDefaults] valueForKey:kUsedTimes];
@@ -111,6 +132,20 @@
 {
     NSString *value = [DESEncodeHelper encryptWithText:projType];
     [[NSUserDefaults standardUserDefaults] setValue:value forKey:kProjType];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSString *)uuid
+{
+    NSString *value = [[NSUserDefaults standardUserDefaults] valueForKey:kUUID];
+    NSString *decValue = [DESEncodeHelper decryptWithText:value];
+    return decValue;
+}
+
++ (void)setUUID:(NSString *)uuid
+{
+    NSString *value = [DESEncodeHelper encryptWithText:uuid];
+    [[NSUserDefaults standardUserDefaults] setValue:value forKey:kUUID];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -441,43 +476,23 @@
 
 + (NSString *)wifiMacAddress
 {
-    int mib[6] = {};
-	mib[0] = CTL_NET;
-	mib[1] = AF_ROUTE;
-	mib[2] = 0;
-	mib[3] = AF_LINK;
-	mib[4] = NET_RT_IFLIST;
-	
-	if ((mib[5] = if_nametoindex("en0")) == 0)
-    {
-		return nil;
-	}
-	
-    size_t len = 0;
-	char *buf = NULL;
-	if (sysctl(mib, 6, NULL, &len, NULL, 0) < 0)
-    {
-		return nil;
-	}
-	
-	if ((buf = malloc(len)) == NULL)
-    {
-		return nil;
-	}
-	
-	if (sysctl(mib, 6, buf, &len, NULL, 0) < 0)
-    {
-        free(buf);
-		return nil;
-	}
-	
-	struct if_msghdr *ifm = (struct if_msghdr *)buf;
-	struct sockaddr_dl *sdl = (struct sockaddr_dl *)(ifm + 1);
-	unsigned char *ptr = (unsigned char *)LLADDR(sdl);
-	NSString *outstring = [NSString stringWithFormat:@"%02x%02x%02x%02x%02x%02x", *ptr, *(ptr+1), *(ptr+2), *(ptr+3), *(ptr+4), *(ptr+5)];
-	free(buf);
     
-	return [outstring uppercaseString];
+    //use ad identifier for activation code after ios 7.0
+//    NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+//    NSLog(@"%@", adId);
+//    return adId;
+    
+    NSString *uuid = [UUIDUtils readUUIDFromKeyChain];
+    
+    if (uuid == nil || [uuid isEqualToString:@""]) {
+        NSLog(@"no uuid in keychain, create one");
+        uuid = [UUIDUtils getUUIDString];
+        [UUIDUtils saveUUIDToKeyChain:uuid];
+    }
+    
+    NSLog(@"uuid in keychain:%@", uuid);
+    return uuid;
+    
 }
 
 + (NSString *)deviceSeries
@@ -489,7 +504,7 @@
 + (BOOL)authorizateKey:(NSString *)activeCode bySeriesNo:(NSString *)seriesNo
 {
     NSString *reallyCode = [seriesNo stringByAppendingString:kSurfix];
-    NSLog(@"reallycode: %@", reallyCode);
+//    NSLog(@"reallycode: %@", reallyCode);
     NSString *md5Encoded = [MDFiveDigestHelper md5HexDigest:reallyCode];
     NSRange range = NSMakeRange(0, 16);
 

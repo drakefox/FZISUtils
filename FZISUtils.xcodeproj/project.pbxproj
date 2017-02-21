@@ -29,6 +29,10 @@
 		7582DA8C1C5726B90044C5D0 /* FZISLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582DA8A1C5726B90044C5D0 /* FZISLineView.m */; };
 		7588D08A1C47843D0084B05F /* FZISMeasurementTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 7588D0881C47843D0084B05F /* FZISMeasurementTool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7588D08B1C47843D0084B05F /* FZISMeasurementTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7588D0891C47843D0084B05F /* FZISMeasurementTool.m */; };
+		75BFA5401E5BF0E5001DE73C /* KeychainItemWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 75BFA53E1E5BF0E5001DE73C /* KeychainItemWrapper.h */; };
+		75BFA5411E5BF0E5001DE73C /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BFA53F1E5BF0E5001DE73C /* KeychainItemWrapper.m */; };
+		75BFA5441E5BF13B001DE73C /* UUIDUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 75BFA5421E5BF13B001DE73C /* UUIDUtils.h */; };
+		75BFA5451E5BF13B001DE73C /* UUIDUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BFA5431E5BF13B001DE73C /* UUIDUtils.m */; };
 		75D5A1D4197CF2EA00EAE6D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75D5A1D3197CF2EA00EAE6D6 /* Foundation.framework */; };
 		75D5A1E3197CF2EA00EAE6D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75D5A1D3197CF2EA00EAE6D6 /* Foundation.framework */; };
 		75D5A1E8197CF2EA00EAE6D6 /* libFZISUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75D5A1D0197CF2EA00EAE6D6 /* libFZISUtils.a */; };
@@ -105,6 +109,10 @@
 		7582DA8A1C5726B90044C5D0 /* FZISLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZISLineView.m; sourceTree = "<group>"; };
 		7588D0881C47843D0084B05F /* FZISMeasurementTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZISMeasurementTool.h; sourceTree = "<group>"; };
 		7588D0891C47843D0084B05F /* FZISMeasurementTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZISMeasurementTool.m; sourceTree = "<group>"; };
+		75BFA53E1E5BF0E5001DE73C /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		75BFA53F1E5BF0E5001DE73C /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		75BFA5421E5BF13B001DE73C /* UUIDUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUIDUtils.h; sourceTree = "<group>"; };
+		75BFA5431E5BF13B001DE73C /* UUIDUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUIDUtils.m; sourceTree = "<group>"; };
 		75D5A1D0197CF2EA00EAE6D6 /* libFZISUtils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFZISUtils.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		75D5A1D3197CF2EA00EAE6D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		75D5A1D7197CF2EA00EAE6D6 /* FZISUtils-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FZISUtils-Prefix.pch"; sourceTree = "<group>"; };
@@ -225,6 +233,10 @@
 				75D5A1FA197CF35600EAE6D6 /* RequestPreprocessor.m */,
 				75D5A1FB197CF35600EAE6D6 /* Utils.h */,
 				75D5A1FC197CF35600EAE6D6 /* Utils.m */,
+				75BFA5421E5BF13B001DE73C /* UUIDUtils.h */,
+				75BFA5431E5BF13B001DE73C /* UUIDUtils.m */,
+				75BFA53E1E5BF0E5001DE73C /* KeychainItemWrapper.h */,
+				75BFA53F1E5BF0E5001DE73C /* KeychainItemWrapper.m */,
 				7582DA851C5725360044C5D0 /* FZISMapView.h */,
 				7582DA861C5725360044C5D0 /* FZISMapView.m */,
 				7582DA891C5726B90044C5D0 /* FZISLineView.h */,
@@ -313,6 +325,7 @@
 				7582DA871C5725360044C5D0 /* FZISMapView.h in Headers */,
 				75D5A201197CF39B00EAE6D6 /* Utils.h in Headers */,
 				75D5A200197CF39B00EAE6D6 /* RequestPreprocessor.h in Headers */,
+				75BFA5441E5BF13B001DE73C /* UUIDUtils.h in Headers */,
 				7582DA7B1C5723980044C5D0 /* FZISSandboxTool.h in Headers */,
 				75D5A20B197CF6F200EAE6D6 /* DESEncodeHelper.h in Headers */,
 				7582DA791C5723980044C5D0 /* FZISQueryTool.h in Headers */,
@@ -327,6 +340,7 @@
 				75D5A212197CF93600EAE6D6 /* GTMDefines.h in Headers */,
 				756DB6861CE1D6E500103999 /* shapefil.h in Headers */,
 				7582DA731C5723980044C5D0 /* AGSSketchGraphicsLayer+exposePrivate.h in Headers */,
+				75BFA5401E5BF0E5001DE73C /* KeychainItemWrapper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,10 +431,12 @@
 				75D5A1FD197CF35600EAE6D6 /* RequestPreprocessor.m in Sources */,
 				75D5A1FE197CF35600EAE6D6 /* Utils.m in Sources */,
 				7582DA881C5725360044C5D0 /* FZISMapView.m in Sources */,
+				75BFA5411E5BF0E5001DE73C /* KeychainItemWrapper.m in Sources */,
 				7582DA7C1C5723980044C5D0 /* FZISSandboxTool.m in Sources */,
 				75D5A211197CF93600EAE6D6 /* GTMBase64.m in Sources */,
 				7582DA8C1C5726B90044C5D0 /* FZISLineView.m in Sources */,
 				75F94A8B1C18149D00FFF3AE /* ShpHelper.m in Sources */,
+				75BFA5451E5BF13B001DE73C /* UUIDUtils.m in Sources */,
 				756DB6851CE1D6E500103999 /* dbfopen.c in Sources */,
 				756DB6871CE1D6E500103999 /* shpopen.c in Sources */,
 				7582DA761C5723980044C5D0 /* FZISGPSTool.m in Sources */,

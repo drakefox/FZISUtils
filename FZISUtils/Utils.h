@@ -41,11 +41,17 @@
 + (NSString *)expireTime;
 + (void)setExpireTime:(NSString *)expireTime;
 
++ (NSString *)checkPointTime;
++ (void)setCheckPointTime:(NSString *)checkPointTime;
+
 + (NSString *)usedTimes;
 + (void)setUsedTimes:(NSString *)usedTimes;
 
 + (NSString *)projType;
 + (void)setProjType:(NSString *)projType;
+
++ (NSString *)uuid;
++ (void)setUUID:(NSString *)uuid;
 
 + (BOOL)deviceAuthed;
 + (void)setDeviceAuthed:(BOOL)authed;
