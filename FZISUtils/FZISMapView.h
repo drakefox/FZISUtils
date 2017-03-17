@@ -38,7 +38,7 @@
     FZISMeasurementTool *_measurementTool;
     FZISGPSTool *_gpsTool;
     NSInteger _baseLayerCount;
-    
+//    AGSGDBGeodatabase *geoDatabase;
 }
 
 @property (nonatomic, assign) NSInteger mapStatus;

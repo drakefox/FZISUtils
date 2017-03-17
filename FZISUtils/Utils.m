@@ -485,12 +485,12 @@
     NSString *uuid = [UUIDUtils readUUIDFromKeyChain];
     
     if (uuid == nil || [uuid isEqualToString:@""]) {
-        NSLog(@"no uuid in keychain, create one");
+//        NSLog(@"no uuid in keychain, create one");
         uuid = [UUIDUtils getUUIDString];
         [UUIDUtils saveUUIDToKeyChain:uuid];
     }
     
-    NSLog(@"uuid in keychain:%@", uuid);
+//    NSLog(@"uuid in keychain:%@", uuid);
     return uuid;
     
 }

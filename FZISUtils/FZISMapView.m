@@ -428,7 +428,25 @@
 
 - (void)loadGDBLayer:(NSString *)layerName
 {
-    AGSGDBGeodatabase *geoDatabase = [AGSGDBGeodatabase geodatabaseWithPath:[NSString stringWithFormat:@"%@/GDBLayer/GDBLayers.geodatabase", self.filePath] error:nil];
+    AGSGDBGeodatabase *geoDatabase;
+    
+//    if ([layerName isEqualToString:@"市政雨水线800以上"]) {
+//        geoDatabase = [AGSGDBGeodatabase geodatabaseWithPath:[NSString stringWithFormat:@"%@/GDBLayer/sz.geodatabase", self.filePath] error:nil];
+//        NSLog(@"get gdb 1");
+//    }
+//    else if ([layerName isEqualToString:@"小区雨水线800以上"])
+//    {
+//        geoDatabase = [AGSGDBGeodatabase geodatabaseWithPath:[NSString stringWithFormat:@"%@/GDBLayer/xq.geodatabase", self.filePath] error:nil];
+//        NSLog(@"get gdb 2");
+//    }
+//    else
+//    {
+//        geoDatabase = [AGSGDBGeodatabase geodatabaseWithPath:[NSString stringWithFormat:@"%@/GDBLayer/GDBLayers.geodatabase", self.filePath] error:nil];
+//        NSLog(@"get gdb 3");
+//    }
+    
+    geoDatabase = [AGSGDBGeodatabase geodatabaseWithPath:[NSString stringWithFormat:@"%@/GDBLayer/GDBLayers.geodatabase", self.filePath] error:nil];
+    
     AGSGDBFeatureTable *gdbTable = [geoDatabase featureTableForLayerName:layerName];
     AGSFeatureTableLayer *flayer = [[AGSFeatureTableLayer alloc] initWithFeatureTable:gdbTable];
     

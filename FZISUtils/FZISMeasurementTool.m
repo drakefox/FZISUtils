@@ -51,26 +51,30 @@
 
 - (void)updateWithPoint:(AGSPoint *)point
 {
+    AGSCompositeSymbol *compSymbol = [[AGSCompositeSymbol alloc] init];
+    
     AGSSimpleMarkerSymbol* markerSymbol = [AGSSimpleMarkerSymbol simpleMarkerSymbol];
     markerSymbol.color = [UIColor greenColor];
     markerSymbol.size = CGSizeMake(8.0, 8.0);
     markerSymbol.style = AGSSimpleMarkerSymbolStyleCircle;
     
-    AGSGraphic *graphicPoint = [AGSGraphic graphicWithGeometry:point symbol:markerSymbol attributes:nil];
-    [_drawLayer addGraphic:graphicPoint];
+    [compSymbol addSymbol:markerSymbol];
+    
+//    AGSGraphic *graphicPoint = [AGSGraphic graphicWithGeometry:point symbol:markerSymbol attributes:nil];
+//    [_drawLayer addGraphic:graphicPoint];
     
     [_measurementPoints addObject:point];
     
     if (_measurementType == 0) {
-        [self measureDistance];
+        [self measureDistanceWithSymbol:compSymbol];
     }
     else
     {
-        [self measureArea];
+        [self measureAreaWithSymbol:compSymbol];
     }
 }
 
-- (void)measureDistance
+- (void)measureDistanceWithSymbol:(AGSCompositeSymbol *)symbol
 {
     if ([_tmpGraphics count] > 0) {
         [_drawLayer removeGraphics:_tmpGraphics];//清除旧的
@@ -79,7 +83,7 @@
     
     AGSPoint *lastPoint = [_measurementPoints lastObject];
     
-    AGSPoint *distancetLablePoint = [AGSPoint pointWithX:lastPoint.x + kLabelOffset * _drawLayer.mapView.mapScale / _drawLayer.mapView.maxScale y:lastPoint.y - kLabelOffset * _drawLayer.mapView.mapScale / _drawLayer.mapView.maxScale spatialReference:lastPoint.spatialReference];
+//    AGSPoint *distancetLablePoint = [AGSPoint pointWithX:lastPoint.x + kLabelOffset * _drawLayer.mapView.mapScale / _drawLayer.mapView.maxScale y:lastPoint.y - kLabelOffset * _drawLayer.mapView.mapScale / _drawLayer.mapView.maxScale spatialReference:lastPoint.spatialReference];
     
     AGSMapView *mapView = _drawLayer.mapView;
     CGPoint lastScreenPoint = [mapView toScreenPoint:lastPoint];
@@ -128,13 +132,17 @@
     AGSTextSymbol *txtSymbol = [[AGSTextSymbol alloc] initWithText:distanceDisplay color:[UIColor purpleColor]];
     txtSymbol.fontSize = 17.0f;
     txtSymbol.fontFamily = @"Heiti SC";
-    AGSGraphic *distanceLabel = [AGSGraphic graphicWithGeometry:distancetLablePoint symbol:txtSymbol attributes:nil];
-    _lastLabelGraphic = distanceLabel;
-    [_drawLayer addGraphic:distanceLabel];
+    txtSymbol.offset = kLabelOffset;
+    
+    [symbol addSymbol:txtSymbol];
+    
+    AGSGraphic *measurePoint = [AGSGraphic graphicWithGeometry:lastPoint symbol:symbol attributes:nil];
+    _lastLabelGraphic = measurePoint;
+    [_drawLayer addGraphic:measurePoint];
 }
 
 
-- (void)measureArea
+- (void)measureAreaWithSymbol:(AGSCompositeSymbol *)symbol
 {
     if ([_tmpGraphics count] > 0) {
         [_drawLayer removeGraphics:_tmpGraphics];//清除旧的
@@ -142,7 +150,7 @@
     }
     
     AGSPoint *lastPoint = [_measurementPoints lastObject];
-    AGSPoint *areaLablePoint = [AGSPoint pointWithX:lastPoint.x + kLabelOffset * _drawLayer.mapView.mapScale / _drawLayer.mapView.maxScale y:lastPoint.y - kLabelOffset * _drawLayer.mapView.mapScale / _drawLayer.mapView.maxScale spatialReference:lastPoint.spatialReference];
+//    AGSPoint *areaLablePoint = [AGSPoint pointWithX:lastPoint.x + kLabelOffset * _drawLayer.mapView.mapScale / _drawLayer.mapView.maxScale y:lastPoint.y - kLabelOffset * _drawLayer.mapView.mapScale / _drawLayer.mapView.maxScale spatialReference:lastPoint.spatialReference];
     
     AGSMapView *mapView = _drawLayer.mapView;
     CGPoint lastScreenPoint = [mapView toScreenPoint:lastPoint];
@@ -191,41 +199,78 @@
             areaDisplay = [NSString stringWithFormat:@"%0.2f平方米", area];
         }
         areaDisplay = [NSString stringWithFormat:@"%@, 合%0.2f亩", areaDisplay, areaInMu];
+        
         AGSTextSymbol *txtSymbol = [[AGSTextSymbol alloc] initWithText:areaDisplay color:[UIColor purpleColor]];
         txtSymbol.fontSize = 17.0f;
         txtSymbol.fontFamily = @"Heiti SC";
-        AGSGraphic *areaLabel = [AGSGraphic graphicWithGeometry:areaLablePoint symbol:txtSymbol attributes:nil];
-        [_tmpGraphics addObject:areaLabel];
-        _lastLabelGraphic = areaLabel;
-        [_drawLayer addGraphic:areaLabel];
+        txtSymbol.offset = kLabelOffset;
         
+        [symbol addSymbol:txtSymbol];
+        
+        AGSGraphic *measurePoint = [AGSGraphic graphicWithGeometry:lastPoint symbol:symbol attributes:nil];
+        [_tmpGraphics addObject:measurePoint];
+        _lastLabelGraphic = measurePoint;
+        [_drawLayer addGraphic:measurePoint];
+        
+    }
+    else
+    {
+        AGSGraphic *measurePoint = [AGSGraphic graphicWithGeometry:lastPoint symbol:symbol attributes:nil];
+        [_drawLayer addGraphic:measurePoint];
     }
 }
 
 - (void)stopMeasurement
 {
+    [_drawLayer removeGraphic:_lastLabelGraphic];
+    //            AGSTextSymbol *symbol = (AGSTextSymbol *)_lastLabelGraphic.symbol;
+    AGSCompositeSymbol *symbol = (AGSCompositeSymbol *)_lastLabelGraphic.symbol;
+    
+    AGSTextSymbol *txtSymbol;
+    AGSTextSymbol *newTxtSymbol;
+    
+    for (AGSSymbol *tmpSymbol in [symbol symbols]) {
+        if (![tmpSymbol isKindOfClass:[AGSTextSymbol class]]) {
+            continue;
+        }
+        txtSymbol = (AGSTextSymbol *)tmpSymbol;
+    }
+    
+    [symbol removeSymbol:txtSymbol];
+    
     if (_measurementType == 0) {
         
         if ([_measurementPoints count] >= 2) {
-            [_drawLayer removeGraphic:_lastLabelGraphic];
-            AGSTextSymbol *symbol = (AGSTextSymbol *)_lastLabelGraphic.symbol;
-            AGSTextSymbol *txtSymbol = [[AGSTextSymbol alloc] initWithText:[NSString stringWithFormat:@"全长：%@", symbol.text] color:[UIColor purpleColor]];
-            txtSymbol.fontSize = 17.0f;
-            txtSymbol.fontFamily = @"Heiti SC";
-            AGSGraphic *distanceLabel = [AGSGraphic graphicWithGeometry:_lastLabelGraphic.geometry symbol:txtSymbol attributes:nil];
-            [_drawLayer addGraphic:distanceLabel];
+//            [_drawLayer removeGraphic:_lastLabelGraphic];
+//            AGSTextSymbol *symbol = (AGSTextSymbol *)_lastLabelGraphic.symbol;
+            
+//            AGSTextSymbol *txtSymbol = [[AGSTextSymbol alloc] initWithText:[NSString stringWithFormat:@"全长：%@", symbol.text] color:[UIColor purpleColor]];
+//            txtSymbol.fontSize = 17.0f;
+//            txtSymbol.fontFamily = @"Heiti SC";
+            newTxtSymbol = [[AGSTextSymbol alloc] initWithText:[NSString stringWithFormat:@"全长：%@", txtSymbol.text] color:[UIColor purpleColor]];
+            newTxtSymbol.fontSize = 17.0f;
+            newTxtSymbol.fontFamily = @"Heiti SC";
+            newTxtSymbol.offset = kLabelOffset;
+            [symbol addSymbol:newTxtSymbol];
+//            AGSGraphic *distanceLabel = [AGSGraphic graphicWithGeometry:_lastLabelGraphic.geometry symbol:symbol attributes:nil];
+            [_drawLayer addGraphic:_lastLabelGraphic];
         }
     }
     else
     {
         if ([_measurementPoints count] >= 3) {
-            [_drawLayer removeGraphic:_lastLabelGraphic];
-            AGSTextSymbol *symbol = (AGSTextSymbol *)_lastLabelGraphic.symbol;
-            AGSTextSymbol *txtSymbol = [[AGSTextSymbol alloc] initWithText:[NSString stringWithFormat:@"面积：%@", symbol.text] color:[UIColor purpleColor]];
-            txtSymbol.fontSize = 17.0f;
-            txtSymbol.fontFamily = @"Heiti SC";
-            AGSGraphic *areaLabel = [AGSGraphic graphicWithGeometry:_lastLabelGraphic.geometry symbol:txtSymbol attributes:nil];
-            [_drawLayer addGraphic:areaLabel];
+//            [_drawLayer removeGraphic:_lastLabelGraphic];
+//            AGSTextSymbol *symbol = (AGSTextSymbol *)_lastLabelGraphic.symbol;
+//            AGSTextSymbol *txtSymbol = [[AGSTextSymbol alloc] initWithText:[NSString stringWithFormat:@"面积：%@", symbol.text] color:[UIColor purpleColor]];
+//            txtSymbol.fontSize = 17.0f;
+//            txtSymbol.fontFamily = @"Heiti SC";
+//            AGSGraphic *areaLabel = [AGSGraphic graphicWithGeometry:_lastLabelGraphic.geometry symbol:txtSymbol attributes:nil];
+            newTxtSymbol = [[AGSTextSymbol alloc] initWithText:[NSString stringWithFormat:@"面积：%@", txtSymbol.text] color:[UIColor purpleColor]];
+            newTxtSymbol.fontSize = 17.0f;
+            newTxtSymbol.fontFamily = @"Heiti SC";
+            newTxtSymbol.offset = kLabelOffset;
+            [symbol addSymbol:newTxtSymbol];
+            [_drawLayer addGraphic:_lastLabelGraphic];
         }
     }
 }
@@ -246,17 +291,17 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"mapScale"]) {
-        double maxScale = _drawLayer.mapView.maxScale;
-        double currScale = [[change objectForKey:@"new"] doubleValue];
-        double lastScale = [[change objectForKey:@"old"] doubleValue];
-        double offset = kLabelOffset * (currScale - lastScale) / maxScale;
-        for (AGSGraphic *graphic in [_drawLayer graphics]) {
-            if ([graphic.symbol isKindOfClass:[AGSTextSymbol class]]) {
-                AGSPoint *point = (AGSPoint *)graphic.geometry;
-                AGSPoint *newPoint = [[AGSPoint alloc] initWithX:point.x + offset y:point.y - offset spatialReference:point.spatialReference];
-                graphic.geometry = newPoint;
-            }
-        }
+//        double maxScale = _drawLayer.mapView.maxScale;
+//        double currScale = [[change objectForKey:@"new"] doubleValue];
+//        double lastScale = [[change objectForKey:@"old"] doubleValue];
+//        double offset = kLabelOffset * (currScale - lastScale) / maxScale;
+//        for (AGSGraphic *graphic in [_drawLayer graphics]) {
+//            if ([graphic.symbol isKindOfClass:[AGSTextSymbol class]]) {
+//                AGSPoint *point = (AGSPoint *)graphic.geometry;
+//                AGSPoint *newPoint = [[AGSPoint alloc] initWithX:point.x + offset y:point.y - offset spatialReference:point.spatialReference];
+//                graphic.geometry = newPoint;
+//            }
+//        }
         
         if ([_measurementPoints count] > 0) {
             AGSPoint *lastPoint = [_measurementPoints lastObject];

@@ -44,7 +44,7 @@
     }
     
     [_mapView.sketchLayer removeAllGraphics];
-    queryGraphic = [[AGSGraphic alloc] init];
+    queryGraphic = nil;//[[AGSGraphic alloc] init];
     
     if (self.delegate != nil && [self.delegate respondsToSelector:@selector(FZISQueryTool:didExecuteWithQueryResult:)]) {
         [self.delegate FZISQueryTool:self didExecuteWithQueryResult:results];

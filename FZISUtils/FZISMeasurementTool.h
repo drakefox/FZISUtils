@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <ArcGIS/ArcGIS.h>
 
-#define kLabelOffset 10.0
+//#define kLabelOffset 10.0
+#define kLabelOffset CGPointMake(0, -20);
 
 @interface FZISMeasurementTool : NSObject
 {
